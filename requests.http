@@ -1,0 +1,135 @@
+ GET https://news.ycombinator.com/ HTTP/1.1 
+
+ ###
+
+GET / HTTP/1.1
+Host: example.com
+
+###
+
+POST / HTTP/1.1
+Host: example.com
+Content-Type: application/json
+
+{
+    "key": "value"
+}
+
+###
+
+GET https://pokeapi.co/api/v2/pokemon HTTP/1.1
+Content-Type: application/json
+
+###
+
+GET https://pokeapi.co/api/v2/pokemon/13/ HTTP/1.1
+Content-Type: application/json
+
+###
+
+GET https://pokeapi.co/api/v2/pokemon?offset=25&limit=12
+Content-Type: application/json
+
+###
+
+GET https://pokeapi.co/api/v2/item
+Content-Type: application/json
+
+###
+
+GET https://pokeapi.co/api/v2/item/2/
+Content-Type: application/json
+
+###
+GET https://pokeapi.co/api/v2/ability?offset=50
+Content-Type: application/json
+
+###
+GET https://pokeapi.co/api/v2/ability/15/
+Content-Type: application/json
+
+###
+PUT https://pokeapi.co/api/v2/ability/15/
+Content-Type: application/json
+
+#############################
+########Bug Sightings########
+#############################
+
+###
+
+GET http://localhost:8080/sighting HTTP/1.1
+Accept: application/json
+
+###
+
+GET /sighting/2 HTTP/1.1
+Host: localhost:8080
+Accept: application/json
+
+###
+
+POST http://localhost:8080/sighting HTTP/1.1
+Content-Type: application/json
+
+{
+  "bugType": "Mosquito",
+  "description": "mosquitos are jerks",
+  "date": "2020-07-04",
+  "interest": 0.0
+}
+
+###
+
+PUT http://localhost:8080/sighting/2 HTTP/1.1
+Content-Type: application/json
+
+{
+  "sightingId": 2,
+  "bugType": "Cicada",
+  "description": "the cicadas are singing in the trees",
+  "date": "2020-09-24",
+  "interest": 9.245
+}
+
+###
+
+DELETE http://localhost:8080/sighting/3 HTTP/1.1
+
+################
+#Other Requests#
+################
+#Create new bug sightings.
+###
+POST http://localhost:8080/sighting HTTP/1.1
+Content-Type: application/json
+
+{
+  "bugType": "Butterfly",
+  "description": "so pretty",
+  "date": "2021-06-10",
+  "interest": 9.5
+}
+
+#Update a sighting other than the cicada. Update a sighting that doesn't exist.
+###
+PUT http://localhost:8080/sighting/5 HTTP/1.1
+Content-Type: application/json
+
+{
+  "sightingId": 5,
+  "bugType": "Butterfly",
+  "description": "super pretty",
+  "date": "2021-06-10",
+  "interest": 10.0
+}
+
+#Delete sightings that exist and don't exist.
+###
+DELETE http://localhost:8080/sighting/2 HTTP/1.1
+###
+DELETE http://localhost:8080/sighting/500 HTTP/1.1
+#Read all sightings after create/update/delete operations to confirm sightings changed.
+###
+GET http://localhost:8080/sighting HTTP/1.1
+Accept: application/json
